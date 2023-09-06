@@ -35,4 +35,12 @@ public class FederatedIdentityAuthenticationSuccessHandler implements Authentica
 
         this.delegate.onAuthenticationSuccess(request, response, authentication);
     }
+
+    public void setOAuth2UserHandler(Consumer<OAuth2User> oauth2UserHandler) {
+        this.oauth2UserHandler = oauth2UserHandler;
+    }
+
+    public void setOidcUserHandler(Consumer<OidcUser> oidcUserHandler) {
+        this.oidcUserHandler = oidcUserHandler;
+    }
 }

@@ -1,2 +1,3 @@
-package org.example.federation;public class FederationIdentityAuthenticationFailureHandler {
+package org.example.federation;
+public class FederationIdentityAuthenticationFailureHandler {
 }

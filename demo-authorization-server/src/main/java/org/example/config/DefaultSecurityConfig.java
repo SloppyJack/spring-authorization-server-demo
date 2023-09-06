@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.User;
@@ -31,12 +32,15 @@ public class DefaultSecurityConfig {
                 .formLogin(formLogin ->
                         formLogin
                                 .loginPage("/login")
+                                .successHandler(authenticationSuccessHandler())
                 )
                 .oauth2Login(oauth2Login ->
                         oauth2Login
                                 .loginPage("/login")
                                 .successHandler(authenticationSuccessHandler())
-                );
+                )
+                // 关闭csrf
+                .csrf(AbstractHttpConfigurer::disable);
 
         return http.build();
     }
@@ -49,8 +53,8 @@ public class DefaultSecurityConfig {
     @Bean
     public UserDetailsService users() {
         UserDetails user = User.withDefaultPasswordEncoder()
-                .username("user1")
-                .password("password")
+                .username("root")
+                .password("root")
                 .roles("USER")
                 .build();
         return new InMemoryUserDetailsManager(user);

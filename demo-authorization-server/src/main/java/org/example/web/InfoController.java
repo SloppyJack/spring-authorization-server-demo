@@ -1,2 +1,3 @@
-package org.example.web;public class InfoController {
+package org.example.web;
+public class InfoController {
 }
